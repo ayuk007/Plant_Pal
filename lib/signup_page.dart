@@ -1,31 +1,44 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:plant_pal/signup_page.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class SignUpPage extends StatelessWidget {
+  const SignUpPage({super.key});
 
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
+
+    List images = [
+      "g.png",
+      "t.png",
+      "f.png"
+    ];
+
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     return Scaffold(
-        backgroundColor: Colors.white,
+       backgroundColor: Colors.white,
         body: Column(children: [
           Container(
             width: w,
             height: h * 0.3,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("img/loginimg.png"),
+                image: AssetImage("img/signup.png"),
                 fit: BoxFit.cover,
               ),
+            ),
+            child: Column(
+              children: [
+                SizedBox(height: h*0.16,),
+                CircleAvatar(
+                  radius: 55,
+                  backgroundColor: Colors.white70,
+                  backgroundImage: AssetImage(
+                    "img/profile1.png"
+                  )
+                ),
+              ]
             ),
           ),
           Container(
@@ -34,18 +47,6 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "Hello",
-                      style:
-                          TextStyle(fontSize: 70, fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      "Sign Into your Account",
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.grey[500],
-                      ),
-                    ),
                     SizedBox(height: 50),
                     Container(
                       decoration: BoxDecoration(
@@ -61,11 +62,11 @@ class _LoginPageState extends State<LoginPage> {
                           ]),
                       child: TextField(
                         decoration: InputDecoration(
-                            hintText: "Email",
-                            prefixIcon: Icon(
-                              Icons.email, 
-                              color: Colors.deepOrangeAccent
-                            ),
+                          hintText: "Email Id",
+                          prefixIcon: Icon(
+                            Icons.email, 
+                            color: Colors.deepOrangeAccent,
+                          ),
                             focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(30),
                                 borderSide: BorderSide(
@@ -98,11 +99,11 @@ class _LoginPageState extends State<LoginPage> {
                           ]),
                       child: TextField(
                         decoration: InputDecoration(
-                            hintText: "Password",
-                            prefixIcon: Icon(
-                              Icons.password_sharp, 
-                              color: Colors.deepOrangeAccent
-                            ),
+                          hintText: "Password",
+                          prefixIcon: Icon(
+                            Icons.password_sharp, 
+                            color: Colors.deepOrangeAccent
+                          ),
                             focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(30),
                                 borderSide: BorderSide(
@@ -121,62 +122,85 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     SizedBox(height: 20),
-                    Row(children: [
-                      Expanded(
-                        child: Container(),
+                  //   Row(children: [
+                  //     Expanded(
+                  //       child: Container(),
+                  //     ),
+                  //     Text(
+                  //       "Sign Into your Account",
+                  //       style: TextStyle(
+                  //         fontSize: 20,
+                  //         color: Colors.grey[500],
+                  //       ),
+                  //     ),
+                  //   ])
+                   ])
+                   ),
+                    SizedBox(height: 70),
+                    Container(
+                      width: w * 0.5,
+                      height: h * 0.08,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        image: DecorationImage(
+                          image: AssetImage("img/loginbtn.png"),
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                      Text(
-                        "Sign Into your Account",
+                      child: Center(
+                        child: Text(
+                          "Sign Up",
+                          style: TextStyle(
+                            fontSize: 36,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    RichText(
+                      text: TextSpan(
+                        recognizer: TapGestureRecognizer()..onTap=()=>Get.back(),
+                        text: "Have an account?",
                         style: TextStyle(
                           fontSize: 20,
                           color: Colors.grey[500],
                         ),
                       ),
-                    ])
-                  ])),
-          SizedBox(height: 70),
-          Container(
-            width: w * 0.5,
-            height: h * 0.08,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              image: DecorationImage(
-                image: AssetImage("img/loginbtn.png"),
-                fit: BoxFit.cover,
-              ),
-            ),
-            child: Center(
-              child: Text(
-                "Sign In",
-                style: TextStyle(
-                  fontSize: 36,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ),
-          SizedBox(height: w * 0.03),
-          RichText(
+                    ),
+                    SizedBox(height: w * 0.2),
+                    RichText(
             text: TextSpan(
-              text: "Don't have an account?",
+              text: "SignUp using one of the following methods",
               style: TextStyle(
                 color: Colors.grey[500],
-                fontSize: 20,
+                fontSize: 15,
               ),
-              children: [
-                TextSpan(
-                  text: " Create",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  recognizer: TapGestureRecognizer()..onTap=()=>Get.to(()=>SignUpPage()),
-                ),
-              ],
-            ),
+             ),
           ),
-        ]));
-  }
-}
+                    Wrap(
+                      children: List<Widget>.generate(
+                        3,
+                        (index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: CircleAvatar(
+                              radius: 30,
+                              backgroundColor: Colors.grey[200],
+                              child: CircleAvatar(
+                                radius: 25,
+                                backgroundImage: AssetImage(
+                                  "img/"+images[index]
+                                ),
+                              ),
+                            ),
+                          );
+                        }
+                      )
+                    )
+                  ]
+                )
+              );
+            }
+          }
